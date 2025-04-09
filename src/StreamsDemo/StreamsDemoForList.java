@@ -58,6 +58,20 @@ public class StreamsDemoForList {
 		System.out.println("list8: " + list8);
 		
 		
+		// min : return first element of sorted list
+		
+		Comparator<Integer> compMin = (i,j)-> {
+			return i-j;
+		};
+		Optional<Integer> min = list8.stream().min(compMin);
+		
+		System.out.println(min.get());
+		
+		// max : return last element of sorted list
+		Optional<Integer> max = list8.stream().max(compMin);
+		
+		System.out.println(max.get());
+		
 		
 	}
 
