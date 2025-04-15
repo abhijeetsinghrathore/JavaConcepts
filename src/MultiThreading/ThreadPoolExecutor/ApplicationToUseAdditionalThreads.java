@@ -10,7 +10,7 @@ public class ApplicationToUseAdditionalThreads {
 	{
 		//ThreadPoolExecutor executor = new ThreadPoolExecutor(2,4,10 ,TimeUnit.MINUTES,new ArrayBlockingQueue<>(2), Executors.defaultThreadFactory(), new ThreadPoolExecutor.DiscardPolicy());
 		ThreadPoolExecutor executor = new ThreadPoolExecutor(2,4,10 ,TimeUnit.MINUTES,new ArrayBlockingQueue<>(2),new CustomThreadFactory(), new CustomRejectHandler());
-		
+		executor.allowCoreThreadTimeOut(true);// this will allow the termination of thread is the thread pool after an idle time of 10mins
 		
 		for(int i = 0;i<5;i++) {
 			
