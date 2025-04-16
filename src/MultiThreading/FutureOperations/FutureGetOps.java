@@ -21,6 +21,7 @@ public class FutureGetOps {
 		
 		try
 		{
+			// task will take atleast 7 sec to complete, hence timeout exception will occur
 			f.get(2,TimeUnit.SECONDS);
 		}
 		catch(TimeoutException e)
