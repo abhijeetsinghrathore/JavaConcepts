@@ -27,6 +27,12 @@ public class ExecutorsUtility {
 		// Fork-Join or Work-Stealing executor
 		ExecutorService executor3 = Executors.newWorkStealingPool();
 		executor3.submit(()->{
+			System.out.println("Work-Stealing thread pool");
+		});
+		
+		// Another mehthod to create ForkJoin pool
+		ForkJoinPool pool = ForkJoinPool.commonPool();
+		pool.submit(()->{
 			System.out.println("Fork-Join thread pool");
 		});
 	}
