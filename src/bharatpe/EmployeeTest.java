@@ -63,19 +63,50 @@ public class EmployeeTest {
 		 */
 		
 		
-		Comparator<Employee> comp = (a,b) -> {return (int)(b.salary-a.salary);};
-		List<Employee> sortedList = employeeList.stream().sorted(comp).collect(Collectors.toList());
-		System.out.println(sortedList);
+		/*
+		 * Comparator<Employee> comp = (a,b) -> {return (int)(b.salary-a.salary);};
+		 * List<Employee> sortedList =
+		 * employeeList.stream().sorted(comp).collect(Collectors.toList());
+		 * System.out.println(sortedList);
+		 */
 		
+		
+		//TODO: Use Stream API to find out the Duplicate Employee Entries by Employee ID
+		
+		Map<Long, List<Employee>> duplicatesById = employeeList.stream()
+			    .collect(Collectors.groupingBy(Employee::getId))
+			    .entrySet().stream()
+			    .filter(entry -> entry.getValue().size() > 1)
+			    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+		
+		for(Map.Entry<Long, List<Employee>> entry : duplicatesById.entrySet())
+		{
+			System.out.println(entry.getKey());
+		}
+		
+		
+		//TODO: Use Stream API to find out the total salary of each designation sorted by total salary in descending order
+		
+		Map<String, Double> designationToSumSalaryMap = 
+				employeeList.stream().
+				collect(Collectors.groupingBy(Employee::getDesignation, Collectors.summingDouble(Employee::getSalary)));
+		
+		
+		
+		designationToSumSalaryMap.entrySet().stream()
+	    .sorted((e1, e2) -> Double.compare(e2.getValue(), e1.getValue()))
+	    .forEach(entry -> System.out.println(
+	        "Designation: " + entry.getKey() + ", Total Salary: " + entry.getValue()
+	    ));
 		
 		
 	
 	}
 	
-	//TODO: Use Stream API to find out the Duplicate Employee Entries by Employee ID
+
 	
 	
 
-	//TODO: Use Stream API to find out the total salary of each designation sorted by total salary in descending order
+	
 	
 }
